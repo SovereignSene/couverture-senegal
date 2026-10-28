@@ -102,8 +102,11 @@ h1{font-family:'Fraunces',serif;font-weight:500;margin:0}
 .card:hover{border-color:var(--line-strong);box-shadow:0 3px 16px rgba(20,19,15,.05);
   transform:translateY(-1.5px)}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.card-top-left{display:flex;gap:16px;align-items:flex-start;}
+.ins-logo{width:48px;height:48px;object-fit:contain;border-radius:8px;background:#fff;
+  border:1px solid var(--line);padding:4px;flex-shrink:0;}
 .card h3{font-family:'Fraunces',serif;font-size:25px;font-weight:500;margin:0 0 3px;
-  letter-spacing:-.02em}
+  letter-spacing:-.02em;padding-top:2px;}
 .card .meta{font-size:13px;color:var(--muted)}
 .nums{text-align:right;flex-shrink:0}
 .prem{font-family:'Fraunces',serif;font-size:22px;font-weight:500;letter-spacing:-.015em;
@@ -157,6 +160,11 @@ select{font-family:inherit;font-size:13.5px;font-weight:500;padding:8px 12px;bor
 .phead{padding:56px 0 26px}
 .phead h1{font-size:clamp(32px,5vw,50px);line-height:1.05;letter-spacing:-.03em;max-width:18ch}
 .phead .lede{font-size:17px;margin-top:20px}
+
+/* profile specific */
+.profile-header{display:flex;align-items:center;gap:24px;margin-top:20px;}
+.profile-header img{width:72px;height:72px;padding:6px;}
+.profile-header h1{margin:0;line-height:1;}
 
 /* bars */
 .bars{display:flex;flex-direction:column;gap:3px;margin:10px 0 6px}
@@ -244,6 +252,7 @@ footer{border-top:1px solid var(--line);padding:44px 0 56px;margin-top:0}
   .seg button{flex:1}
   .tbl .hide-s{display:none}
   .sec-h{flex-direction:column;align-items:flex-start;gap:10px}
+  .profile-header{flex-direction:column;align-items:flex-start;gap:16px}
 }
 </style>
 </head>
@@ -294,7 +303,7 @@ const LINES = [
 ];
 
 const INSURERS = [
-  {id:'axa', name:'AXA', group:'AXA', groupLabel:'AXA', origin:'Groupe français', since:1938,
+  {id:'axa', name:'AXA', group:'AXA', groupLabel:'AXA', origin:'Groupe français', since:1938, domain:'axa.sn',
    p23:25.09, p22:22.73,
    cov:{auto:'verified',health:'verified',repatriation:'none',digital:'verified'},
    channels:['Agence','Mobile'],
@@ -306,7 +315,7 @@ const INSURERS = [
      repatriation:'Aucune offre publique de rapatriement ou d\'obsèques identifiée pour AXA Sénégal.',
      digital:'OpenInsur : parcours 100 % digital, de la souscription au renouvellement.'
    }},
-  {id:'amsa', name:'AMSA', group:'AMSA', groupLabel:'AMSA', origin:'Assureur sénégalais', since:null,
+  {id:'amsa', name:'AMSA', group:'AMSA', groupLabel:'AMSA', origin:'Assureur sénégalais', since:null, domain:'amsaassurances.com',
    p23:17.40, p22:15.99,
    cov:{auto:'verified',health:'verified',repatriation:'verified',digital:'none'},
    channels:['Agence'],
@@ -318,7 +327,7 @@ const INSURERS = [
      repatriation:'Offre diaspora incluant le rapatriement de corps et l\'accompagnement familial.',
      digital:'Pas de parcours de souscription en ligne public identifié.'
    }},
-  {id:'prevoyance', name:'Prévoyance Assurances', group:'Prévoyance', groupLabel:'Prévoyance Assurances',
+  {id:'prevoyance', name:'Prévoyance Assurances', group:'Prévoyance', groupLabel:'Prévoyance Assurances', domain:'prevoyanceassurances.sn',
    origin:'Assureur sénégalais', since:null,
    p23:16.11, p22:15.18,
    cov:{auto:'declared',health:'declared',repatriation:'declared',digital:'none'},
@@ -331,7 +340,7 @@ const INSURERS = [
      repatriation:'Couverture décès avec rapatriement du corps mentionnée à 100 % — source secondaire.',
      digital:'Aucun parcours digital public identifié.'
    }},
-  {id:'sanlam', name:'Sanlam', group:'SanlamAllianz', groupLabel:'SanlamAllianz',
+  {id:'sanlam', name:'Sanlam', group:'SanlamAllianz', groupLabel:'SanlamAllianz', domain:'sanlam.com',
    origin:'Groupe sud-africain', since:null,
    p23:15.90, p22:15.23,
    cov:{auto:'verified',health:'verified',repatriation:'declared',digital:'verified'},
@@ -344,7 +353,7 @@ const INSURERS = [
      repatriation:'Couverture obsèques et rapatriement via le groupe Sanlam — source secondaire.',
      digital:'Scan & Pay : souscription par QR code et Mobile Money, attestation instantanée.'
    }},
-  {id:'askia', name:'Askia', group:'Askia', groupLabel:'Askia', origin:'Assureur sénégalais', since:null,
+  {id:'askia', name:'Askia', group:'Askia', groupLabel:'Askia', origin:'Assureur sénégalais', since:null, domain:'askia.sn',
    p23:13.81, p22:12.87,
    cov:{auto:'verified',health:'verified',repatriation:'none',digital:'verified'},
    channels:['Agence','Mobile'],
@@ -356,7 +365,7 @@ const INSURERS = [
      repatriation:'Aucune offre publique de rapatriement ou d\'obsèques identifiée.',
      digital:'Intégration à l\'application Kash Kash : vie, santé, auto, multirisque.'
    }},
-  {id:'nsia', name:'NSIA', group:'NSIA', groupLabel:'NSIA', origin:'Groupe ivoirien', since:null,
+  {id:'nsia', name:'NSIA', group:'NSIA', groupLabel:'NSIA', origin:'Groupe ivoirien', since:null, domain:'groupensia.com',
    p23:13.72, p22:14.47,
    cov:{auto:'verified',health:'verified',repatriation:'none',digital:'none'},
    channels:['Agence','Bancassurance'],
@@ -368,7 +377,7 @@ const INSURERS = [
      repatriation:'Aucune offre publique de rapatriement ou d\'obsèques identifiée.',
      digital:'Pas de parcours de souscription en ligne public identifié.'
    }},
-  {id:'allianz', name:'Allianz', group:'SanlamAllianz', groupLabel:'SanlamAllianz',
+  {id:'allianz', name:'Allianz', group:'SanlamAllianz', groupLabel:'SanlamAllianz', domain:'allianz.com',
    origin:'Groupe allemand', since:1938,
    p23:13.30, p22:13.45,
    cov:{auto:'verified',health:'verified',repatriation:'verified',digital:'verified'},
@@ -381,7 +390,7 @@ const INSURERS = [
      repatriation:'Assistance Ô Pays : rapatriement du corps ou inhumation au pays de résidence, frais d\'obsèques.',
      digital:'Application Allianz Care (recherche de prestataires, déclaration de sinistre) ; micro-assurance via BIMA.'
    }},
-  {id:'finafrica', name:'Finafrica', group:'Finafrica', groupLabel:'Finafrica',
+  {id:'finafrica', name:'Finafrica', group:'Finafrica', groupLabel:'Finafrica', domain:'finafrica.com',
    origin:'Groupe panafricain (ex-Salama)', since:null,
    p23:11.18, p22:7.79,
    cov:{auto:'verified',health:'verified',repatriation:'verified',digital:'declared'},
@@ -431,6 +440,7 @@ function rows(){
       g.note = 'Sanlam et Allianz ont fusionné : SanlamAllianz. Scan & Pay (souscription mobile) et Assistance Ô Pays (rapatriement diaspora).';
       g.origin = 'Groupe sud-africain';
       g.name = 'SanlamAllianz';
+      g.domain = 'sanlam.com'; // Fallback domain for group
     }
   }
   return [...map.values()];
@@ -456,13 +466,21 @@ function valHtml(status){
   return `<span class="val v-${status}"><span class="dot"></span>${STAT[status]}</span>`;
 }
 
+function getLogoUrl(domain) {
+    // Using Google's favicon service to pull logos dynamically.
+    return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+}
+
 function cardHtml(i){
   const g = growth(i);
   return `<a class="card" href="#/assureurs/${i.ids.join('+')}">
     <div class="card-top">
-      <div>
-        <h3>${i.name}</h3>
-        <div class="meta">${i.origin}${i.since ? ' · depuis ' + i.since : ''}${i.ids.length > 1 ? ' · ' + i.ids.length + ' marques' : ''}</div>
+      <div class="card-top-left">
+        <img src="${getLogoUrl(i.domain)}" alt="${i.name}" class="ins-logo" onerror="this.style.display='none'">
+        <div>
+          <h3>${i.name}</h3>
+          <div class="meta">${i.origin}${i.since ? ' · depuis ' + i.since : ''}${i.ids.length > 1 ? ' · ' + i.ids.length + ' marques' : ''}</div>
+        </div>
       </div>
       <div class="nums">
         <div class="prem">${f2(i.p23)} Md FCFA
@@ -640,7 +658,15 @@ function pageInsurers(){
       ${rows().sort((a,b)=>b.p23-a.p23).map(i => {
         const g = growth(i);
         return `<tr onclick="location.hash='#/assureurs/${i.ids.join('+')}'" style="cursor:pointer">
-          <td><span class="nm">${i.name}</span><span class="sub">${i.origin}</span></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:12px">
+              <img src="${getLogoUrl(i.domain)}" alt="${i.name}" class="ins-logo" style="width:32px;height:32px;padding:2px" onerror="this.style.display='none'">
+              <div>
+                <span class="nm">${i.name}</span>
+                <span class="sub">${i.origin}</span>
+              </div>
+            </div>
+          </td>
           <td class="num">${f2(i.p23)}</td>
           <td class="num hide-s">${f2(i.p22)}</td>
           <td class="num" style="color:${g>=0?'var(--green)':'#A33B2A'};font-weight:600">${g>=0?'+':'−'}${f1(Math.abs(g)*100)} %</td>
@@ -667,13 +693,16 @@ function pageProfile(ids){
   const p22 = ins.reduce((s,i)=>s+i.p22,0);
   const g = p23/p22 - 1;
   const title = multi ? 'SanlamAllianz' : ins[0].name;
+  const logoUrl = getLogoUrl(ins[0].domain);
 
   return `<div class="wrap">
     <div class="phead">
       <a class="back" href="#/assureurs">← Tous les assureurs</a>
-      <div class="eyebrow">Fiche assureur</div>
-      <h1>${title}</h1>
-      <p class="lede">${multi
+      <div class="profile-header">
+        <img src="${logoUrl}" class="ins-logo" onerror="this.style.display='none'">
+        <h1>${title}</h1>
+      </div>
+      <p class="lede" style="margin-top:16px">${multi
         ? 'Sanlam et Allianz ont fusionné. Les deux marques restent commercialement distinctes au Sénégal.'
         : ins[0].origin + (ins[0].since ? ' · présent depuis ' + ins[0].since : '')}</p>
     </div>
@@ -778,7 +807,12 @@ function pageMarket(){
         ${rows().sort((a,b)=>b.p23-a.p23).map(i => {
           const g = growth(i);
           return `<tr>
-            <td><span class="nm">${i.name}</span></td>
+            <td>
+              <div style="display:flex;align-items:center;gap:12px">
+                <img src="${getLogoUrl(i.domain)}" class="ins-logo" style="width:32px;height:32px;padding:2px" onerror="this.style.display='none'">
+                <span class="nm">${i.name}</span>
+              </div>
+            </td>
             <td class="num">${f2(i.p23)}</td>
             <td class="num" style="color:${g>=0?'var(--green)':'#A33B2A'};font-weight:600">${g>=0?'+':'−'}${f1(Math.abs(g)*100)} %</td>
             <td class="num">${pct(i.p23/NONLIFE)}</td>
