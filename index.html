@@ -67,9 +67,8 @@ h3{font-size:22px;letter-spacing:-.01em;color:var(--navy);margin-bottom:12px}
 /* hero */
 .hero{padding:100px 0 80px;background:linear-gradient(180deg, #fff 0%, var(--paper) 100%);position:relative;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:60px;align-items:center}
-.hero-img{width:100%;border-radius:16px;box-shadow:0 20px 40px rgba(10,25,47,.08);border:4px solid #fff}
 
-/* pillars */
+/* pillars / cards */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .pillar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:32px;
@@ -160,7 +159,7 @@ footer{background:var(--navy);color:#fff;padding:64px 0 32px;margin-top:0}
       <a href="#/methode" data-r="methode">Notre Méthode</a>
       <a href="#/marche" data-r="marche">Le Marché</a>
       <a href="#/cabinet" data-r="cabinet">Le Cabinet</a>
-      <a class="btn btn-gold" style="padding:10px 20px;margin-left:12px" href="#/contact">Devis</a>
+      <a class="btn btn-gold" style="padding:10px 20px;margin-left:12px" href="#/contact" data-r="contact">Devis</a>
     </nav>
   </div>
 </header>
@@ -203,7 +202,7 @@ footer{background:var(--navy);color:#fff;padding:64px 0 32px;margin-top:0}
 const NONLIFE = 171.540, TOTAL = 265.300;
 const INSURERS = [
   {name:'AXA', p23:25.09, p22:22.73, origin:'Groupe français'},
-  {name:'SanlamAllianz', p23:29.20, p22:28.68, origin:'Groupe sud-africain/allemand'}, // Merged
+  {name:'SanlamAllianz', p23:29.20, p22:28.68, origin:'Groupe sud-africain/allemand'},
   {name:'AMSA', p23:17.40, p22:15.99, origin:'Assureur sénégalais'},
   {name:'Prévoyance', p23:16.11, p22:15.18, origin:'Assureur sénégalais'},
   {name:'Askia', p23:13.81, p22:12.87, origin:'Assureur sénégalais'},
@@ -231,7 +230,6 @@ function pageHome(){
         </div>
       </div>
       <div>
-        <!-- Placeholder for a professional image or abstract graphic -->
         <div style="background:var(--navy);border-radius:16px;padding:40px;color:#fff;box-shadow:0 20px 40px rgba(10,25,47,.15)">
            <div style="font-family:'Fraunces',serif;font-size:40px;color:var(--gold);margin-bottom:20px">01</div>
            <h3 style="color:#fff;margin-bottom:12px">Analyse des risques</h3>
@@ -273,44 +271,6 @@ function pageHome(){
   </section>
 
   <section class="sec" style="background:#fff">
-    <div class="wrap">
-      <div class="sec-header">
-        <span class="eyebrow">Nos expertises</span>
-        <h2>Des solutions pour chaque étape de votre vie et de votre entreprise.</h2>
-      </div>
-      <div class="grid-2">
-        <div>
-          <h3>Particuliers</h3>
-          <ul class="svc-list" style="margin-top:16px">
-            <li>Automobile et deux-roues</li>
-            <li>Habitation et copropriété</li>
-            <li>Santé et complémentaire santé</li>
-            <li>Individuelle accident</li>
-            <li>Voyage et assistance</li>
-            <li>Prévoyance et protection familiale</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Professionnels & Entreprises</h3>
-          <ul class="svc-list" style="margin-top:16px">
-            <li>Multirisque professionnelle</li>
-            <li>Responsabilité civile exploitation</li>
-            <li>Flottes automobiles</li>
-            <li>Transport de marchandises</li>
-            <li>Bris de machines et risques informatiques</li>
-            <li>Pertes d'exploitation</li>
-            <li>Assurances de chantier et construction</li>
-            <li>Risques industriels et techniques</li>
-          </ul>
-        </div>
-      </div>
-      <div class="callout" style="margin-top:40px;background:var(--paper);border-left-color:var(--navy)">
-        <p><strong>Conseil & Gestion des risques :</strong> Audit de vos contrats existants • Cartographie des risques • Optimisation des budgets d'assurance • Prévention et sensibilisation.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
     <div class="wrap grid-2" style="align-items:center">
       <div>
         <span class="eyebrow">Le mot de la fondatrice</span>
@@ -329,6 +289,59 @@ function pageHome(){
             <span class="quote-title">Fondatrice et Gérante</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+  `;
+}
+
+function pageServices(){
+  return `
+  <section class="hero" style="padding-bottom:40px">
+    <div class="wrap">
+      <span class="eyebrow">Offre de services</span>
+      <h1>Des solutions pour les personnes, les biens, les responsabilités et les projets.</h1>
+      <p class="lede">Dynamiqia Capital Assure vous accompagne dans l'identification de vos risques et la mise en place des garanties adaptées à votre profil.</p>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="wrap grid-2">
+      <div class="pillar">
+        <h3 style="font-size:26px;margin-bottom:20px;color:var(--navy)">Assurances des particuliers</h3>
+        <ul class="svc-list" style="grid-template-columns:1fr;gap:16px;font-size:16px">
+          <li>Automobile et deux-roues</li>
+          <li>Habitation et copropriété</li>
+          <li>Santé et complémentaire santé</li>
+          <li>Individuelle accident</li>
+          <li>Voyage et assistance</li>
+          <li>Prévoyance et protection familiale</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <h3 style="font-size:26px;margin-bottom:20px;color:var(--navy)">Professionnels & Entreprises</h3>
+        <ul class="svc-list" style="grid-template-columns:1fr;gap:16px;font-size:16px">
+          <li>Multirisque professionnelle et entreprise</li>
+          <li>Responsabilité civile exploitation et professionnelle</li>
+          <li>Flottes automobiles</li>
+          <li>Transport de marchandises</li>
+          <li>Bris de machines et tous risques informatiques</li>
+          <li>Pertes d'exploitation</li>
+          <li>Assurances de chantier et construction</li>
+          <li>Risques industriels et techniques</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:40px">
+      <div class="callout" style="background:var(--paper);border-left-color:var(--gold)">
+        <h3 style="font-size:22px;margin-bottom:12px;color:var(--navy)">Conseil et gestion des risques</h3>
+        <ul class="svc-list" style="grid-template-columns:1fr 1fr;gap:12px">
+          <li>Audit des contrats existants</li>
+          <li>Cartographie des risques</li>
+          <li>Analyse des garanties et exclusions</li>
+          <li>Optimisation des budgets d'assurance</li>
+          <li>Prévention et sensibilisation</li>
+          <li>Assistance à la gestion des sinistres</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -515,7 +528,6 @@ function pageContact(){
   <section class="sec" style="padding-top:0">
     <div class="wrap" style="max-width:600px">
       <div class="pillar" style="padding:40px;text-align:left">
-        <!-- Placeholder form -->
         <form onsubmit="event.preventDefault(); alert('Merci ! Votre demande a bien été prise en compte. (Prototype)');">
           <div style="margin-bottom:20px">
             <label style="display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px">Nom complet / Entreprise *</label>
@@ -547,7 +559,7 @@ function pageContact(){
 }
 
 function pageNotFound(){
-  return `<div class="wrap"><div class="phead"><h1>Page introuvable.</h1><p class="lede"><a href="#/">Retour à l'accueil →</a></p></div></div>`;
+  return `<div class="wrap"><div class="phead" style="padding-top:100px"><h1>Page introuvable.</h1><p class="lede"><a href="#/" style="color:var(--gold);font-weight:600">Retour à l'accueil →</a></p></div></div>`;
 }
 
 /* ---------- router ---------- */
@@ -564,6 +576,7 @@ function render(){
   window.scrollTo(0,0);
 
   if(page === 'home' || page === ''){ app.innerHTML = pageHome(); setNav('home'); return; }
+  if(page === 'services'){ app.innerHTML = pageServices(); setNav('services'); return; }
   if(page === 'methode'){ app.innerHTML = pageMethod(); setNav('methode'); return; }
   if(page === 'marche'){ app.innerHTML = pageMarket(); setNav('marche'); return; }
   if(page === 'cabinet'){ app.innerHTML = pageCabinet(); setNav('cabinet'); return; }
